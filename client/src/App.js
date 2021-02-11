@@ -10,8 +10,6 @@ const App = () => {
     const [currentUser, setCurrentUser] = useState(initialUser);
     const [editing, setEditing] = useState(false);
     const [users, setUsers] = useState([]);
-    const [currentUsers, setCurrentUsers] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(-1);
 
 
     useEffect(() => {
@@ -21,8 +19,6 @@ const App = () => {
     // refresh
     const refreshList = () => {
         listUser();
-        setCurrentUsers(null);
-        setCurrentIndex(-1);
     };
 
     // READ
@@ -31,20 +27,20 @@ const App = () => {
             .then(response => {
                 setUsers(response.data);
             })
-            .catch(e => {
-                console.log(e);
+            .catch(err => {
+                console.log(err);
             });
     }
 
     // CREATE
     const addUser = async (user) => {
         await Axios.create(user)
-            .then(response => {
+            .then(() => {
                 setUsers(user)
                 refreshList();
             })
-            .catch(e => {
-                console.log(e);
+            .catch(err => {
+                console.log(err);
             });
     };
 
@@ -57,13 +53,13 @@ const App = () => {
     // UPDATE
     const updateUser = async (id, user) => {
         await Axios.update(id._id, id)
-            .then(response => {
+            .then(() => {
                 setUsers(id)
                 setEditing(false);
                 refreshList();
             })
-            .catch(e => {
-                console.log(e);
+            .catch(err => {
+                console.log(err);
             });
     };
 
