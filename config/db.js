@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose
     .connect(
-        "mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.rmmou.mongodb.net/CRUD-hook",
+        process.env.MONGODB_URI || "mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.rmmou.mongodb.net/CRUD-hook",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
